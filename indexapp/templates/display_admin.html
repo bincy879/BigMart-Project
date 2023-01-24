@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display</title>
+</head>
+<body>
+      <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Bordered Table</h6>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Mobile No.</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Password</th>
+                                        <th scope="col">Confirm</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for d in data %}
+                                        <tr>
+                                            <td>{{ d.Name }}</td>
+                                            <td>{{ d.Mob }}</td>
+                                            <td>{{ d.Email_id }}</td>
+                                            <td>
+                                                <img src="{{ d.Image.url }}" width="30px" height="30px">
+                                            </td>
+                                            <td>{{ d.User }}</td>
+                                            <td>{{ d.Password }}</td>
+                                            <td>{{ d.Confirm }}</td>
+                                            <td>
+                                                <form action="{% url 'edit_data' dataid=d.id %}" enctype="multipart/form-data">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-outline-dark m-2">Edit</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="{% url 'del_admin' dataid=d.id %}" enctype="multipart/form-data">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-outline-dark m-2">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+</body>
+</html>
+{% endblock %}

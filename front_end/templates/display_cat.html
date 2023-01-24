@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% extends 'home.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="goto-here">
+	<div class="container">
+		<div class="row">
+			{% for p in products %}
+    			<div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
+    				<div class="product">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="{{ p.P_Image.url }}" alt="Colorlib Template">
+<!--    						<span class="status">30%</span>-->
+    						<div class="overlay"></div>
+    					</a>
+    					<div class="text py-3 pb-4 px-3 text-center">
+    						<h3><a href="#">{{p.P_Name}}</a></h3>
+							<h3><a href="#">{{p.Price}}</a></h3>
+							<form action="{% url 'show_pdt_detls' dataid=p.id %}" enctype="multipart/form-data">
+								{% csrf_token %}
+								<button type="submit">Show {{p.P_Name}}</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</body>
+</html>
+{% endblock %}
